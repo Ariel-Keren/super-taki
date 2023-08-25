@@ -41,12 +41,12 @@ namespace TAKI
         {
             bool doesFigureMatch = !isTakiActive && figure == leadingCard.GetFigure();
             bool doesColorMatch = !isPlusTwoActive && color != null && color == leadingCard.GetColor();
-            bool isSpecialStart = leadingCard.GetFigure() == "+3" || leadingCard.GetFigure() == "+3 Breaker" || leadingCard.GetFigure() == "Super Taki" && leadingCard.GetColor() == null;
-            bool isSuperTaki = figure == "Super TAKI";
-            bool isChangeColor = figure == "Change Color";
-            bool isKing = figure == "King";
+            bool isSpecialStart = leadingCard.GetColor() == null;
+            bool isSuperTaki = !isPlusTwoActive && figure == "Super TAKI";
+            bool isChangeColor = !isTakiActive && !isPlusTwoActive && figure == "Change Color";
+            bool isKing = !isTakiActive && figure == "King";
             bool isFreeTurn = leadingCard.GetFigure() == "King";
-            bool isPlusThree = figure == "+3";
+            bool isPlusThree = !isTakiActive && figure == "+3";
             bool isPlusThreeBreaker = !isPlusTwoActive && figure == "+3 Breaker";
             bool canBePut = doesFigureMatch || doesColorMatch || isSpecialStart || isSuperTaki || isChangeColor || isKing || isFreeTurn || isPlusThree || isPlusThreeBreaker;
             return canBePut;
