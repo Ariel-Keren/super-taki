@@ -40,7 +40,9 @@ namespace TAKI
 
                 if (shouldDrawThreeCards[playingUserIndex])
                 {
+                    Console.WriteLine($"Someone put a +3!");
                     DrawCard(playingUser, 3);
+                    Console.WriteLine();
                     shouldDrawThreeCards[playingUserIndex] = false;
                 }
 
@@ -50,6 +52,12 @@ namespace TAKI
                 {
                     Console.WriteLine("\nWhich card would you like to put? (Enter the number to its left)");
                     Console.WriteLine("Or enter \"draw\" to draw a card from the draw pile");
+
+                    if (isTakiActive)
+                    {
+                        Console.WriteLine("You can press enter to end the TAKI");
+                    }
+
                     string userInput = Console.ReadLine();
                     bool isPlusTwoActive = numberOfCardsToDraw > 1;
 
@@ -91,10 +99,6 @@ namespace TAKI
                     }
 
                     playingUser.RemoveCard(chosenCard);
-                    if (chosenCard.GetFigure() != "+3" && chosenCard.GetFigure() != "+3 Breaker")
-                    {
-                        leadingCard = chosenCard;
-                    }
 
                     if (isTakiActive)
                     {
@@ -103,6 +107,11 @@ namespace TAKI
                     else
                     {
                         PerformCardAction(chosenCard, playingUserIndex, shouldDrawThreeCards, ref turn, ref numberOfCardsToDraw, ref isTakiActive);
+                    }
+
+                    if (chosenCard.GetFigure() != "+3" && chosenCard.GetFigure() != "+3 Breaker")
+                    {
+                        leadingCard = chosenCard;
                     }
 
                     break;
